@@ -1,7 +1,11 @@
-from flask import Flask
+Tfrom flask import Flask
 from flask import request, jsonify
 
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def home():
+    return "Hey, Modeste"
 
 @app.route('/api/v1/all', methods=['GET'])
 def hello():
