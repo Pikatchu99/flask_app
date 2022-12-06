@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
 from pymongo import MongoClient
+import sys, traceback
 
 app = Flask(__name__)
 
@@ -13,7 +14,9 @@ def home():
         user = users.find_one()
         return "Welcome " + user["name"] + user["surname"] + "in " + user["team"]
     except Exception as error:
-        return str(error)
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        return str(traceback.print_tb(exc_traceback) + traceback.print_exception(exc_value))
+        # return str(error)
 
 @app.route('/api/v1/all', methods=['GET'])
 def hello():
